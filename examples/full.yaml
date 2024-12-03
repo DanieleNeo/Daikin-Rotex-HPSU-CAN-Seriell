@@ -135,42 +135,42 @@ daikin_rotex_can:
 
 #Übersicht
     water_pressure:
-      name: Wasserdruck
+      name: Water Pressure
     t_hs:
       name: T-WE
 #T-WE Soll
     t_ext:  # Oder gehört hier temperature_outside rein?
-      name: T-Aussen
+      name: Outside Temperature
 #T-WW
 #T-WW Soll
 #T-Rücklauf
     flow_rate:
-      name: Durchfluss
+      name: Flow Rate
       update_interval: 10
 #T-HK
 #T-HK Soll
     status_kesselpumpe:
-      name: Status Kesselpumpe
+      name: Boiler Pump Status
     runtime_compressor:
-      name: Laufzeit Compressor
+      name: Runtime Compressor
     runtime_pump:
-      name: Laufzeit Pump
+      name: Runtime Pump
     dhw_mixer_position:
-      name: DHW Mischer Position
+      name: DHW Mixer Position
     qboh:
-      name: EHS für DHW
+      name: EHS for DHW
     ehs_for_ch:
-      name: EHS fuer CH
+      name: EHS for CH
     energy_cooling:
-      name: Energie Kühlung
+      name: Energy Cooling
     qch:
-      name: Energie Heizung
+      name: Energy Heating
     total_energy_produced:
-      name: Erzeugte Energie Gesamt
+      name: Total Energy Produced
     qdhw:
-      name: Energie für WW
+      name: Energy for Hot Water
     total_electrical_energy:
-      name: Elektrische Energie Gesamt
+      name: Total Electrical Energy
 #WE Typ
 #SwNr B1/U1
 #SwNr Regler
@@ -182,11 +182,11 @@ daikin_rotex_can:
 
 # Betriebsart
     operating_mode:
-      name: Betriebsmodus
+      name: Operating Mode
 
 # Raum Soll Tag
     target_room1_temperature:
-      name: Raumsoll 1
+      name: Target Room 1 Temperature
       type: select
   # T-RaumSoll 2
   # T-RaumSoll 3
@@ -197,7 +197,7 @@ daikin_rotex_can:
 
 # WW Solltemp
     target_hot_water_temperature:
-      name: T-WW-Soll1
+      name: Target Hot Water Temperature
       type: select
 
   # T-WWSoll 2
@@ -205,24 +205,24 @@ daikin_rotex_can:
 
 # WW Install
     1_dhw:
-      name: 1 x Warmwasser
+      name: 1 x Hot Water
     hp_hyst_tdhw:
       name: WPHyst TDHW
     delay_time_for_backup_heating:
-      name: Wartezeit BOH
+      name: Delay Time Backup Heating
 
 #Konfiguration
 
 #Konfiguration -> Installation
 #...
     outdoor_unit:
-      name: Aussengerät
+      name: Outdoor Unit
     indoor_unit:
-      name: Innengerät
+      name: Indoor Unit
     function_ehs:
-      name: Funktion EHS
+      name: Funzione EHS
     ch_support:
-      name: HZ Unterstützung
+      name: CH Support
 #Bivalenzfunktion
     smart_grid:
       name: Smart Grid
@@ -238,7 +238,7 @@ daikin_rotex_can:
 #...
 #Sensor Konfig
     external_temp_sensor:
-      name: SKonfig T-Außen
+      name: External Temp Sensor
     # SKonfig T-WW
     # SKonfig Druck
 #AF Anspassung
@@ -248,41 +248,41 @@ daikin_rotex_can:
 #Konfiguration -> Anlagenkonfiguration
 
     power_dhw:
-      name: Leistung WW
+      name: Power DHW
       #type: select
     power_ehs_1:
-      name: Leistung EHS Stufe 1
+      name: Power EHS Level 1
     power_ehs_2:
-      name: Leistung EHS Stufe 2
+      name: Power EHS Level 2
     power_biv:
-      name: Leistung BIV
+      name: Power BIV
     tdiff_dhw_ch:
-      name: TDiff-WW HZU
+      name: TDiff-CH DHW
     max_heating_temperature:
-      name: Max Temp Heizung
+      name: Max Heating Temperature
     quiet:
-      name: Flüsterbetrieb
+      name: Quiet
 #Sonderfunkt Schaltk
 #Wartezeit Sonderfunkt
     t_dhw_1_min:
-      name: Schaltschwelle TDHW
+      name: Switching Threshold TDHW
     delta_temp_ch:
-      name: Spreizung HZ
+      name: Delta Temp CH
     delta_temp_dhw:           # service
-      name: Spreizung WW
+      name: Delta Temp DHW
 #VerzZeitPumpe                # service
     flow_rate_min:            # service
-      name: Durchfluss Min
+      name: Flow Rate Min
     flow_rate_setpoint:       # service
-      name: Durchfluss Soll
+      name: Flow Rate Setpoint
     flow_rate_calc:           # service
-      name: DurchflussBer
+      name: Flow Rate Calc
     flow_rate_hyst:           # service
-      name: Durchfluss Hyst
+      name: Flow Rate Hyst
     supply_temperature_adjustment_heating:
-      name: Anpassung T-VL Heizen
+      name: Supply Temp Adjustment Heating
     supply_temperature_adjustment_cooling:
-      name: Anpassung T-VL Kühlen
+      name: Supply Temp Adjustment Cooling
 #Min Druck
 #Max Druck
 #Soll Druck
@@ -291,9 +291,9 @@ daikin_rotex_can:
 
 # Konfiguration -> HZK Konfig
     hk_function:
-      name: HK Funktion
+      name: HK Function
     temperature_antifreeze:
-      name: T-Frostschutz
+      name: Temperature Antifreeze
 #Gebäudedämumng
 #Estrich
 #Estrichprogramm
@@ -301,21 +301,21 @@ daikin_rotex_can:
 # Konfiguration -> HZK Konfig -> Heizen
 
     heating_limit_day:
-      name: Heizgrenze Tag
+      name: Heating Limit Day
     heating_limit_night:
-      name: Heizgrenze Nacht
+      name: Heating Limit Night
     heating_curve:
-      name: Heizkurve
+      name: Heating Curve
 #Raumeinfluss
 #RF Anpassung
     flow_temperature_day:
-      name: T Vorlauf Tag
+      name: Flow Temperature Day
     flow_temperature_night:
-      name: T Vorlauf Nacht
+      name: Flow Temperature Night
     max_target_flow_temp:
-      name: Max T-Vorlauf
+      name: Max T-Flow
     min_target_flow_temp:
-      name: Min T-Vorlauf
+      name: Min T-Flow
 #Heizk Adaption
 
 # Konfiguration -> HZK Konfig -> Kühlen
@@ -332,57 +332,57 @@ daikin_rotex_can:
 #Konfiguration -> WW Konfig
 
     circulation_with_dhw_program:
-      name: Zirk mit WW-Prog
+      name: Circulation With DHW Program
     circulation_interval_on:
-        name: ZirkInterval An
+        name: Circulation Interval On
     circulation_interval_off:
-        name: ZirkInterval Aus
+        name: Circulation Internal Off
     antileg_day:
-        name: AntilegTag
+        name: Antileg Day
 #AntilegZeit
     antileg_temp:
-        name: AntilegTemp
+        name: Antileg Temp
     max_dhw_loading:
-      name: Max WW Ladezeit
+      name: Max DHW Loading
     dhw_off_time:
-      name: WW Sperrzeit
+      name: DHW Off Time
 
 # Others
 
     electric_heater:
-      name: Heizstäbe - Für Pumpen nach Oktober 2018
+      name: Heating elements - For pumps after October 2018
     thermal_power:
-      name: Thermische Leistung
+      name: Thermal Power
     optimized_defrosting:
-      name: Abtau-Optimierung
+      name: Optimized Defrosting
 
 # To be categorized
 
     bypass_valve:
       name: BPV
     circulation_pump:
-      name: Umwaelzpumpe
+      name: Circulation Pump
     circulation_pump_min:
-      name: Umwälzpumpe Min
+      name: Circulation Pump Min
     circulation_pump_max:
-      name: Umwälzpumpe Max
+      name: Circulation Pump Max
     dhw_run:
-      name: Warmwasser bereiten
+      name: DHW Run
     error_code:
-      name: Fehlercode
+      name: Error Code
     mode_of_operating:
-      name: Betriebsart
+      name: Mode of Operating
     status_kompressor:
-      name: Status Kompressor
+      name: Status Compressor
     tdhw1:
-      name: Warmwassertemperatur
+      name: Hot Water Temperature
     temperature_outside:
-      name: Aussentemperatur
+      name: Outside Temperature
     tr:
-      name: Ruecklauftemperatur Heizung
+      name: Heating Return Temperature
     tv:
-      name: Heizkreis Vorlauf (TV)
+      name: Heating Circuit Flow (TV)
     tvbh:
-      name: Vorlauftemperatur Heizung (TVBH)
+      name: Heating Flow Temperature (TVBH)
     target_supply_temperature:
-      name: Vorlauf Soll
+      name: Target Supply Temperature
