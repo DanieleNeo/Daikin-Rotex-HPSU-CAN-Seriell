@@ -51,8 +51,8 @@ sensor_configuration = [
         "data_offset": 6,
         "data_size": 1,
         "map": {
-            0x00: "Aus",
-            0x01: "An"
+            0x00: "Off",
+            0x01: "On"
         }
     },
     {
@@ -141,7 +141,7 @@ sensor_configuration = [
         "data_offset": 5,
         "data_size": 1,
         "map": {
-            0x00: "Aus",
+            0x00: "Off",
             0x01: "Mo",
             0x02: "Di",
             0x03: "Mi",
@@ -188,8 +188,8 @@ sensor_configuration = [
         "data_offset": 6,
         "data_size": 1,
         "map": {
-            0x00: "Aus",
-            0x01: "An"
+            0x00: "Off",
+            0x01: "On"
         }
     },
     {
@@ -554,7 +554,7 @@ sensor_configuration = [
         "data_offset": 5,
         "data_size": 2,
         "divider": 10.0,
-        "map": {0xFF60 / 10.0: "Aus", **{i: f"{i} °C" for i in range(-15, 6)}}
+        "map": {0xFF60 / 10.0: "Off", **{i: f"{i} °C" for i in range(-15, 6)}}
     },
     {
         "type": "sensor",
@@ -780,7 +780,7 @@ sensor_configuration = [
         "data_offset": 5,
         "data_size": 2,
         "divider": 10.0,
-        "map": {0xFE70 / 10.0: "Aus", **{i: f"{i} °C" for i in range(10, 41)}}
+        "map": {0xFE70 / 10.0: "Off", **{i: f"{i} °C" for i in range(10, 41)}}
     },
     {
         "type": "select",
@@ -796,7 +796,7 @@ sensor_configuration = [
         "data_offset": 5,
         "data_size": 2,
         "divider": 10.0,
-        "map": {0x5A / 10.0: "Aus", **{i: f"{i} °C" for i in range(10, 41)}}
+        "map": {0x5A / 10.0: "Off", **{i: f"{i} °C" for i in range(10, 41)}}
     },
     {
         "type": "number",
@@ -882,11 +882,11 @@ sensor_configuration = [
         "data_size": 1,
         "map": {
             0x00: "Standby",
-            0x01: "Heizen",
-            0x02: "Kühlen",
-            0x03: "Abtauen",
-            0x04: "Warmwasserbereitung"
-        },
+            0x01: "Heating",
+            0x02: "Cooling",
+            0x03: "Defrosting",
+            0x04: "Hot water preparation"
+        }
         "update_entity": "thermal_power"
     },
     {
@@ -897,13 +897,13 @@ sensor_configuration = [
         "data_offset": 5,
         "data_size": 1,
         "map": {
-            0x01: "Bereitschaft",
-            0x03: "Heizen",
-            0x04: "Absenken",
-            0x05: "Sommer",
-            0x11: "Kühlen",
-            0x0B: "Automatik 1",
-            0x0C: "Automatik 2"
+            0x01: "Standby",
+            0x03: "Heating",
+            0x04: "Lowering",
+            0x05: "Summer",
+            0x11: "Cooling",
+            0x0B: "Automatic 1",
+            0x0C: "Automatic 2"
         }
     },
     {
@@ -914,9 +914,9 @@ sensor_configuration = [
         "data_offset": 6,
         "data_size": 1,
         "map": {
-            0x00: "Aus",
-            0x01: "An",
-            0x02: "Nur bei Nacht"
+            0x00: "Off",
+            0x01: "On",
+            0x02: "Night only"
         }
     },
     {
@@ -927,64 +927,64 @@ sensor_configuration = [
         "data_offset": 5,
         "data_size": 2,
         "map": {
-            0: "Kein Fehler",
-            9001: "E9001 Rücklauffühler",
-            9002: "E9002 Vorlauffühler",
-            9003: "E9003 Frostschutzfunktion",
-            9004: "E9004 Durchfluss",
-            9005: "E9005 Vorlauftemperaturfühler",
-            9006: "E9006 Vorlauftemperaturfühler",
-            9007: "E9007 Platine IG defekt",
-            9008: "E9008 Kältemitteltemperatur außerhalb des Bereiches",
-            9009: "E9009 STB Fehler",
-            9010: "E9010 STB Fehler",
-            9011: "E9011 Fehler Flowsensor",
-            9012: "E9012 Fehler Vorlauffühler",
-            9013: "E9013 Platine AG defekt",
-            9014: "E9014 P-Kältemittel hoch",
-            9015: "E9015 P-Kältemittel niedrig",
-            9016: "E9016 Lastschutz Verdichter",
-            9017: "E9017 Ventilator blockiert",
-            9018: "E9018 Expansionsventil",
-            9019: "E9019 Warmwassertemperatur > 85°C",
-            9020: "E9020 T-Verdampfer hoch",
-            9021: "E9021 HPS-System",
-            9022: "E9022 Fehler AT-Fühler",
-            9023: "E9023 Fehler WW-Fühler",
-            9024: "E9024 Drucksensor",
-            9025: "E9025 Fehler Rücklauffühler",
-            9026: "E9026 Drucksensor",
-            9027: "E9027 Aircoil-Fühler Defrost",
-            9028: "E9028 Aircoil-Fühler temp",
-            9029: "E9029 Fehler Kältefühler AG",
-            9030: "E9030 Defekt elektrisch",
-            9031: "E9031 Defekt elektrisch",
-            9032: "E9032 Defekt elektrisch",
-            9033: "E9033 Defekt elektrisch",
-            9034: "E9034 Defekt elektrisch",
-            9035: "E9035 Platine AG defekt",
-            9036: "E9036 Defekt elektrisch",
-            9037: "E9037 Einstellung Leistung",
-            9038: "E9038 Kältemittel Leck",
-            9039: "E9039 Unter/Überspannung",
-            9041: "E9041 Übertragungsfehler",
-            9042: "E9042 Übertragungsfehler",
-            9043: "E9043 Übertragungsfehler",
-            9044: "E9044 Übertragungsfehler",
-            75: "E75 Fehler Außentemperaturfühler",
-            76: "E76 Fehler Speichertemperaturfühler",
-            81: "E81 Kommunikationsfehler Rocon",
-            88: "E88 Kommunikationsfehler Rocon Handbuch",
-            91: "E91 Kommunikationsfehler Rocon Handbuch",
-            128: "E128 Fehler Rücklauftemperaturfühler",
-            129: "E129 Fehler Drucksensor",
-            198: "E198 Durchflussmessung nicht plausibel",
-            200: "E200 Kommunikationsfehler",
-            8005: "E8005 Wasserdruck in Heizungsanlage zu gering",
-            8100: "E8100 Kommunikation",
-            9000: "E9000 Interne vorübergehende Meldung",
-            8006: "W8006 Warnung Druckverlust",
-            8007: "W8007 Wasserdruck in Anlage zu hoch"
+            0: "No error",
+            9001: "E9001 Return sensor",
+            9002: "E9002 Supply sensor",
+            9003: "E9003 Frost protection function",
+            9004: "E9004 Flow",
+            9005: "E9005 Supply temperature sensor",
+            9006: "E9006 Supply temperature sensor",
+            9007: "E9007 PCB IG defective",
+            9008: "E9008 Refrigerant temperature out of range",
+            9009: "E9009 STB error",
+            9010: "E9010 STB error",
+            9011: "E9011 Flow sensor error",
+            9012: "E9012 Supply sensor error",
+            9013: "E9013 PCB AG defective",
+            9014: "E9014 P-Refrigerant high",
+            9015: "E9015 P-Refrigerant low",
+            9016: "E9016 Load protection compressor",
+            9017: "E9017 Fan blocked",
+            9018: "E9018 Expansion valve",
+            9019: "E9019 Hot water temperature > 85°C",
+            9020: "E9020 T-Evaporator high",
+            9021: "E9021 HPS system",
+            9022: "E9022 AT sensor error",
+            9023: "E9023 WW sensor error",
+            9024: "E9024 Pressure sensor",
+            9025: "E9025 Return sensor error",
+            9026: "E9026 Pressure sensor",
+            9027: "E9027 Aircoil sensor Defrost",
+            9028: "E9028 Aircoil sensor temp",
+            9029: "E9029 Cold sensor AG error",
+            9030: "E9030 Electrical defect",
+            9031: "E9031 Electrical defect",
+            9032: "E9032 Electrical defect",
+            9033: "E9033 Electrical defect",
+            9034: "E9034 Electrical defect",
+            9035: "E9035 PCB AG defective",
+            9036: "E9036 Electrical defect",
+            9037: "E9037 Performance setting",
+            9038: "E9038 Refrigerant leak",
+            9039: "E9039 Under/over voltage",
+            9041: "E9041 Transmission error",
+            9042: "E9042 Transmission error",
+            9043: "E9043 Transmission error",
+            9044: "E9044 Transmission error",
+            75: "E75 Outdoor temperature sensor error",
+            76: "E76 Storage temperature sensor error",
+            81: "E81 Communication error Rocon",
+            88: "E88 Communication error Rocon manual",
+            91: "E91 Communication error Rocon manual",
+            128: "E128 Return temperature sensor error",
+            129: "E129 Pressure sensor error",
+            198: "E198 Flow measurement not plausible",
+            200: "E200 Communication error",
+            8005: "E8005 Water pressure in heating system too low",
+            8100: "E8100 Communication",
+            9000: "E9000 Internal temporary message",
+            8006: "W8006 Warning pressure loss",
+            8007: "W8007 Water pressure in system too high"
         }
     },
     {
@@ -1031,8 +1031,8 @@ sensor_configuration = [
         "data_offset": 6,
         "data_size": 1,
         "map": {
-            0x00: "Witterungsgeführt",
-            0x01: "Fest"
+            0x00: "Weather-controlled",
+            0x01: "Fixed"
         }
     },
     {
@@ -1043,9 +1043,9 @@ sensor_configuration = [
         "data_offset": 6,
         "data_size": 1,
         "map": {
-            0x00: "Aus",
-            0x01: "SG Modus 1",
-            0x02: "SG Modus 2"
+            0x00: "Off",
+            0x01: "SG Mode 1",
+            0x02: "SG Mode 2"
         }
     },
     {
@@ -1056,8 +1056,8 @@ sensor_configuration = [
         "data_offset": 6,
         "data_size": 1,
         "map": {
-            0x00: "Aus",
-            0x01: "An"
+            0x00: "Off",
+            0x01: "On"
         }
     },
     {
@@ -1068,10 +1068,10 @@ sensor_configuration = [
         "data_offset": 6,
         "data_size": 1,
         "map": {
-            0x00: "Kein zusätzlicher Wärmeerzeuger",
-            0x01: "Optionaler Backup-Heater",
-            0x02: "WEZ für WW und HZ",
-            0x03: "WEZ1 für WW - WEZ2 für HZ"
+            0x00: "No additional heat generator",
+            0x01: "Optional backup heater",
+            0x02: "WEZ for DHW and heating",
+            0x03: "WEZ1 for DHW - WEZ2 for heating"
         }
     },
     {
@@ -1082,8 +1082,8 @@ sensor_configuration = [
         "data_offset": 6,
         "data_size": 1,
         "map": {
-            0x00: "Aus",
-            0x01: "An"
+            0x00: "Off",
+            0x01: "On"
         }
     },
     {
@@ -1187,7 +1187,7 @@ sensor_configuration = [
         "data_offset": 5,
         "data_size": 2,
         "map": {
-            0x00: "Aus",
+            0x00: "Off",
             0x03: "3 kW",
             0x06: "6 kW",
             0x09: "9 kW"
@@ -1215,10 +1215,10 @@ sensor_configuration = [
         "data_size": 1,
         "map": {
             0x00: "---",
-            0x03: "SGN - Normaler Modus",
-            0x04: "SG1 - WW & HZ ausgeschalten",
-            0x05: "SG2 - WW & HZ + 5°C",
-            0x06: "SG3 - WW 70°C"
+            0x03: "SGN - Normal Mode",
+            0x04: "SG1 - Hot Water & Heating turned off",
+            0x05: "SG2 - Hot Water & Heating + 5°C",
+            0x06: "SG3 - Hot Water 70°C"
         }
     },
 
@@ -1288,8 +1288,8 @@ sensor_configuration = [
         "name": "optimized_defrosting",
         "icon": "mdi:snowflake-melt",
         "map": {
-            0x00: "Aus",
-            0x01: "An"
+            0x00: "Off",
+            0x01: "On"
         }
     }
 ]

@@ -1,0 +1,388 @@
+esphome:
+    name: rotex
+    friendly_name: Rotex
+    platformio_options:
+        build_unflags:
+            - "-std=gnu++11"
+            - "-fno-rtti"
+        build_flags:
+            - "-std=gnu++17"
+    includes:
+      - "components/daikin_rotex_can/partitions_dumper.h"
+
+esp32:
+  board: esp32-s3-devkitc-1
+  framework:
+    type: arduino
+
+external_components:
+  - source: github://Trunks1982/Daikin-Rotex-HPSU-CAN
+
+#
+#external_components:   # Use this block instead of the one above if you want to use the development branch
+#  - source:
+#      type: git
+#      url: https://github.com/Trunks1982/Daikin-Rotex-HPSU-CAN.git
+#      ref: dev
+#    refresh: 0s
+
+logger:
+  level: INFO
+
+api:
+  encryption:
+    key: !secret api_encryption_key
+
+ota:
+  platform: esphome
+  password: !secret ota_password
+
+web_server:
+  version: 3
+
+wifi:
+  ssid: !secret wifi_ssid
+  password: !secret wifi_password
+
+  ap:
+    ssid: DaikinRotex Fallback Hotspot
+    password: H3jGqANSa7aL
+
+captive_portal:
+
+time:
+  - platform: homeassistant
+
+debug:
+  update_interval: 5s
+
+sensor:
+  - platform: uptime
+    type: seconds
+    name: Uptime Seconds
+  - platform: uptime
+    type: timestamp
+    name: Uptime Timestamp
+  - platform: debug
+    free:
+      name: "Heap Free"
+    block:
+      name: "Heap Max Block"
+  - platform: wifi_signal
+    name: "WiFi Signal Sensor"
+    update_interval: 60s
+
+button:
+  - platform: restart
+    name: "Rotex ESP Restart"
+  - platform: template
+    name: Dump Partitions
+    on_press:
+      - lambda: esphome::daikin_rotex_can::PartitionsDumper::dump();
+#switch:
+#  - platform: gpio
+#    name: Smart Grid
+#    pin:
+#      number: GPIO06
+#      inverted: true
+
+#  - platform: gpio
+#    name: EVU
+#    pin:
+#      number: GPIO05
+#      inverted: true
+
+text_sensor:
+  - platform: debug
+    device:
+      name: "Device Info"
+    reset_reason:
+      name: "Reset Reason"
+  - platform: wifi_info
+    ip_address:
+      name: ESP IP Address
+    ssid:
+      name: ESP Connected SSID
+
+canbus:
+  - platform: esp32_can
+    id: can_bus
+    can_id: 0x680
+    tx_pin: GPIO5
+    rx_pin: GPIO6
+    bit_rate: 20kbps
+
+daikin_rotex_can:
+  id: rotext_hpsu
+  canbus_id: can_bus
+  update_interval: 30
+  #max_spread_tvbh_tv: 4
+  #max_spread_tvbh_tr: 4
+  log_filter:
+    name: Log Filter
+  custom_request:
+    name: Custom Request
+  dump:
+    name: Dump Senors
+  project_git_hash:
+    name: Project Git Hash
+  entities:
+
+# Info
+
+    ext:
+      name: Ext
+
+#Übersicht
+    water_pressure:
+      name: Pressione acqua
+    t_hs:
+      name: T-HS
+#T-WE Soll
+    t_ext:  # Oder gehört hier temperature_outside rein?
+      name: Temperatura esterna
+#T-WW
+#T-WW Soll
+#T-Rücklauf
+    flow_rate:
+      name: Flusso volumetrico
+      update_interval: 10
+#T-HK
+#T-HK Soll
+    status_kesselpumpe:
+      name: Stato pompa
+    runtime_compressor:
+      name: Tempo operatività compressore
+    runtime_pump:
+      name: Tempo opreratività pompa
+    dhw_mixer_position:
+      name: ACS posizione miscelatore
+    qboh:
+      name: BOH per ACS
+    ehs_for_ch:
+      name: BOH per CH
+    energy_cooling:
+      name: Energia raffrescamento
+    qch:
+      name: Energia riscaldamento
+    total_energy_produced:
+      name: Energia totale prodotta
+    qdhw:
+      name: Energia per ACS
+    total_electrical_energy:
+      name: Totale energia elettrica
+#WE Typ
+#SwNr B1/U1
+#SwNr Regler
+#SwNr RTXRT
+
+# ESP custom sensors
+    energy_saving_mode:
+      name: ES mode
+
+# Betriebsart
+    operating_mode:
+      name: Modalità operativa
+
+# Raum Soll Tag
+    target_room1_temperature:
+      name: T Ambiente 1
+      type: select
+  # T-RaumSoll 2
+  # T-RaumSoll 3
+
+# Raum Soll Nacht
+  # T-Absenkung
+  # T-Abwesend
+
+# WW Solltemp
+    target_hot_water_temperature:
+      name: Temperatura ACS nominale
+      type: select
+
+  # T-WWSoll 2
+  # T-WWSoll 3
+
+# WW Install
+    1_dhw:
+      name: 1 x acqua calda
+    hp_hyst_tdhw:
+      name: HP Isteresi TDHW
+    delay_time_for_backup_heating:
+      name: Attesa BOH
+
+#Konfiguration
+
+#Konfiguration -> Installation
+#...
+    outdoor_unit:
+      name: Unità esterna
+    indoor_unit:
+      name: Unità interna
+    function_ehs:
+      name: Funzione BOH
+    ch_support:
+      name: CH Support
+#Bivalenzfunktion
+    smart_grid:
+      name: Smart Grid
+    sg_mode:
+      name: SG Modus
+#HT/NT Funktion
+#HT/NT Anschluss
+#Raumthermostat
+#Interlinkfunktion
+#Konfig MFR 1
+#Entlüftungsfunktion
+#PWM Konfig
+#...
+#Sensor Konfig
+    external_temp_sensor:
+      name: Sensore temperatura esterno
+    # SKonfig T-WW
+    # SKonfig Druck
+#AF Anspassung
+#Terminal Adresse
+#Konfig System
+
+#Konfiguration -> Anlagenkonfiguration
+
+    power_dhw:
+      name: Potenza ACS
+      #type: select
+    power_ehs_1:
+      name: BUH s1 power
+    power_ehs_2:
+      name: BUH s2 power
+    power_biv:
+      name: Power BIV
+    tdiff_dhw_ch:
+      name: TDiff-DHW CH Support
+    max_heating_temperature:
+      name: Massima temperatura riscaldamento
+    quiet:
+      name: Modalità silenziosa
+#Sonderfunkt Schaltk
+#Wartezeit Sonderfunkt
+    t_dhw_1_min:
+      name: Switching Threshold TDHW
+    delta_temp_ch:
+      name: Delta Temp CH
+    delta_temp_dhw:           # service
+      name: Delta Temp DHW
+#VerzZeitPumpe                # service
+    flow_rate_min:            # service
+      name: Flow Rate Min
+    flow_rate_setpoint:       # service
+      name: Flow Rate Setpoint
+    flow_rate_calc:           # service
+      name: Flow Rate Calc
+    flow_rate_hyst:           # service
+      name: Flow Rate Hyst
+    supply_temperature_adjustment_heating:
+      name: Supply Temp Adjustment Heating
+    supply_temperature_adjustment_cooling:
+      name: Supply Temp Adjustment Cooling
+#Min Druck
+#Max Druck
+#Soll Druck
+#Max Druckverlust
+#Relaistest
+
+# Konfiguration -> HZK Konfig
+    hk_function:
+      name: Funzione HK
+    temperature_antifreeze:
+      name: Temperatura Antifreeze
+#Gebäudedämumng
+#Estrich
+#Estrichprogramm
+
+# Konfiguration -> HZK Konfig -> Heizen
+
+    heating_limit_day:
+      name: Heating Limit Day
+    heating_limit_night:
+      name: Heating Limit Night
+    heating_curve:
+      name: Heating Curve
+#Raumeinfluss
+#RF Anpassung
+    flow_temperature_day:
+      name: Flow Temperature Day
+    flow_temperature_night:
+      name: Flow Temperature Night
+    max_target_flow_temp:
+      name: Max T-Flow
+    min_target_flow_temp:
+      name: Min T-Flow
+#Heizk Adaption
+
+# Konfiguration -> HZK Konfig -> Kühlen
+
+#StartKühlen A-Temp
+#MaxKühlen A-Temp
+#VL-SollStartKühlen
+#VL-SollMaxKühlen
+#MinVL-SollKühlen
+#T-VLKühlen
+#T_H/K Umschaltung
+#KühlsollwertKorr
+
+#Konfiguration -> WW Konfig
+
+    circulation_with_dhw_program:
+      name: Circulation With DHW Program
+    circulation_interval_on:
+        name: Circulation Interval On
+    circulation_interval_off:
+        name: Circulation Internal Off
+    antileg_day:
+        name: Antileg Day
+#AntilegZeit
+    antileg_temp:
+        name: Antileg Temp
+    max_dhw_loading:
+      name: Max DHW Loading
+    dhw_off_time:
+      name: DHW Off Time
+
+# Others
+
+    electric_heater:
+      name: Elementi riscaldanti - per pompe successive Ottobre 2018
+    thermal_power:
+      name: Potenza termica
+    optimized_defrosting:
+      name: Optimized Defrosting
+
+# To be categorized
+
+    bypass_valve:
+      name: BPV
+    circulation_pump:
+      name: Pompa di circolazione
+    circulation_pump_min:
+      name: Pompa di circolazione Min
+    circulation_pump_max:
+      name: Pompa di circolazione Max
+    dhw_run:
+      name: DHW Run
+    error_code:
+      name: Codice di errore
+    mode_of_operating:
+      name: Modalità di funzionamento
+    status_kompressor:
+      name: Status Compressore
+    tdhw1:
+      name: Temperatura acqua calda
+    temperature_outside:
+      name: Temperature Esterna (2)
+    tr:
+      name: Heating Return Temperature
+    tv:
+      name: Heating Circuit Flow (TV)
+    tvbh:
+      name: Heating Flow Temperature (TVBH)
+    target_supply_temperature:
+      name: Target Supply Temperature

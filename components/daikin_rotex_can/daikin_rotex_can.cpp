@@ -12,7 +12,7 @@ static const char* BETRIEBS_ART = "mode_of_operating";
 static const char* BETRIEBS_MODUS = "operating_mode";
 static const char* OPTIMIZED_DEFROSTING = "optimized_defrosting";
 static const char* TEMPERATURE_ANTIFREEZE = "temperature_antifreeze";   // T-Frostschutz
-static const char* TEMPERATURE_ANTIFREEZE_OFF = "Aus";
+static const char* TEMPERATURE_ANTIFREEZE_OFF = "Off";
 static const uint32_t POST_SETUP_TIMOUT = 15*1000;
 
 DaikinRotexCanComponent::DaikinRotexCanComponent()
