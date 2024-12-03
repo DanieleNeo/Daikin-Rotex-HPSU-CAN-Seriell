@@ -886,7 +886,7 @@ sensor_configuration = [
             0x02: "Cooling",
             0x03: "Defrosting",
             0x04: "Hot water preparation"
-        }
+        },
         "update_entity": "thermal_power"
     },
     {
