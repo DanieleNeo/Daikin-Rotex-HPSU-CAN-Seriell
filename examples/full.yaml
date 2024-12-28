@@ -1,14 +1,12 @@
 esphome:
-    name: rotex
-    friendly_name: Rotex
+    name: hpsu-can
+    friendly_name: HPSU.CAN
     platformio_options:
         build_unflags:
             - "-std=gnu++11"
             - "-fno-rtti"
         build_flags:
             - "-std=gnu++17"
-    includes:
-      - "components/daikin_rotex_can/partitions_dumper.h"
 
 esp32:
   board: esp32-s3-devkitc-1
@@ -43,6 +41,7 @@ web_server:
 wifi:
   ssid: !secret wifi_ssid
   password: !secret wifi_password
+  power_save_mode: none
 
   ap:
     ssid: DaikinRotex Fallback Hotspot
@@ -75,10 +74,6 @@ sensor:
 button:
   - platform: restart
     name: "Rotex ESP Restart"
-  - platform: template
-    name: Dump Partitions
-    on_press:
-      - lambda: esphome::daikin_rotex_can::PartitionsDumper::dump();
 #switch:
 #  - platform: gpio
 #    name: Smart Grid
@@ -130,8 +125,34 @@ daikin_rotex_can:
 
 # Info
 
+#mode
     ext:
       name: Ext
+#RT
+#Pump
+#EHS
+#BPV
+    tv:
+      name: Heizkreis Vorlauf (TV)
+      update_interval: 5
+    tvbh:
+      name: Vorlauftemperatur Heizung (TVBH)
+      update_interval: 5
+    tr:
+      name: Ruecklauftemperatur Heizung
+      update_interval: 5
+#Tdhw
+    temperature_outside:  # ta
+      name: Aussentemperatur
+#V
+#TVBH2
+#TR2
+#Tdhw2
+    tliq:
+      name: Tliq
+    ta2:
+      name: TA2
+#quiet
 
 #Übersicht
     water_pressure:
@@ -183,6 +204,7 @@ daikin_rotex_can:
 # Betriebsart
     operating_mode:
       name: Operating Mode
+      update_interval: 5
 
 # Raum Soll Tag
     target_room1_temperature:
